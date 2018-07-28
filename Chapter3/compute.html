@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学习computed</title>
+</head>
+<body>
+    <div id="name">
+        <input type="text" v-model="firstName" placeholder="姓">
+        <input type="text" v-model="lastName" placeholder="名">
+        <!--<p>{{ firstName}}</p>-->
+    </div>
+
+    <div id="app">
+        <p>{{ fullName }}</p>
+        <!--<p>{{ app2.firstName }}</p>-->
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.min.js"></script>
+    <script src="../global.js"></script>
+    <script>
+        let app, app2;
+
+        app = new Vue({
+            el: "#app",
+            data: {
+                firstName: "Li",
+                lastName: "Yiwei",
+            },
+            computed: {
+                // TODO 查看双向绑定
+                // 1、怎么实现的计算属性随app2.firstName 和 app2.lastName的变化实时更新的
+                // 2、如果把app放在app2前初始化，else 后的代码永远不会执行，fullName()不再被调用
+                //      因为 computed 是依赖缓存的，即 this.firstName 和 this.lastName 都没有发生改变，不会重新加载 fullName 函数
+                //      就没有机会重新执行 else 后面的代码了
+                //      app 在 app2 后初始化,就可以实时更新,每次更改输入框，就会调用一次fullName()
+                fullName: function () {
+                    if (!app2) {
+                        log("debug app2 not exits");
+                        return this.firstName + " " + this.lastName;
+                    } else {
+                        log("debug app2 exits");
+                        return app2.firstName + " " + app2.lastName;
+                    }
+                }
+            }
+        });
+
+        app2 = new Vue({
+            el: "#name",
+            data: {
+                firstName: "",
+                lastName: "",
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul id="app">
+        <template v-for="book in books">
+            <li> 书名: {{ book.name }}</li>
+        </template>
+    </ul>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.min.js"></script>
+    <script src="../global.js"></script>
+
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data: {
+                books: [
+                    {name: "《Vue.js实战1》"},
+                    {name: "《Vue.js实战2》"},
+                    {name: "《Vue.js实战3》"},
+                ]
+            }
+        });
+    </script>
+</body>
+</html>

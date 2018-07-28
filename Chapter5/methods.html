@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <p>点击次数：{{ count }}</p>
+        <button type="button" @click="handleAdd">+?</button>
+        <button type="button" @click.once="handleAdd()">+1</button>
+        <button type="button" @click="handleAdd(10)">+10</button>
+        <a @click="handleClick('禁止弹窗', $event)" href="https://www.baidu.com">点击不跳转</a>
+        <a @click.stop href="https://www.baidu.com">点击不跳转2</a>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.min.js"></script>
+    <script src="../global.js"></script>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data: {
+                count: 0,
+            },
+            methods: {
+                handleAdd: function (value) {
+                    log("debug value", value);
+                    value = value || 1;
+                    this.count += value;
+                },
+                handleClick(message, event) {
+                    alert(message);
+                    log("debug event:", event);
+                    event.preventDefault();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

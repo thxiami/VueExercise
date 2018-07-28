@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .color1 {
+            color: brown;
+        }
+        .color2 {
+            color: green;
+        }
+        .largeSize {
+            font-size: large;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app" :class=" classes ">
+    <!--<div id="app" :class="{'text1': isActive, 'text2': !isActive}">-->
+        <p>TEXT</p>
+    </div>
+
+    <!--<div id="app2" :class=" classes2 ">-->
+    <div id="app2" :class="[cls1, cls2]">
+        <p>TEXT2</p>
+    </div>
+
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.min.js"></script>
+    <script src="../global.js"></script>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data:{
+                isActive: true,
+            },
+            computed: {
+                classes: function () {
+                    return {
+                        'color1': this.isActive,
+                        'color2': !this.isActive,
+                    };
+                }
+            }
+        });
+        let app2 = new Vue({
+            el: "#app2",
+            data: {
+                cls1: 'color1',
+                cls2: {
+                    ['color2']: true,
+                    ['largeSize']: true,
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learn Orders</title>
+    <style type="text/css">
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <template v-if="type === 'name'">
+            <label >用户名</label>
+            <input  placeholder="输入用户名">
+        </template>
+        <template v-else>
+            <label >邮箱</label>
+            <input placeholder="输入邮箱">
+        </template>
+        <button @click="handleToggleClick">切换</button>
+    </div>
+
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.min.js"></script>
+    <script src="../global.js"></script>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data: {
+                message: "Helloworld.",
+                type: "name",
+            },
+            methods: {
+                handleToggleClick: function () {
+                    log("handleToggleClick in");
+                    if (this.type === 'name') {
+                        this.type = 'email'
+                    } else {
+                        this.type = 'name'
+                    }
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

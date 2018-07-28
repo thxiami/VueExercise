@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.min.js"></script>
+    <script src="../global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--<input type="radio" :checked="">-->
+        <!--<label>单选按钮</label>-->
+
+        <input type="radio" name="sex"/>
+        <label>男</label>
+
+        <input type="radio" name="sex" checked="checked" />
+        <label>女</label>
+
+        <input type="radio" v-model="picked" value="html" />
+        <label>HTML</label>
+
+        <input type="radio" v-model="picked" value="js" />
+        <label>JS</label>
+
+        <p>选择的是： {{ picked }}</p>
+    </div>
+
+    <div id="fuxuankuang">
+        <input id="html" type="checkbox" v-model="checked" value="html"/>
+        <label for="html">HTML</label>
+        <br>
+
+        <input id="js" type="checkbox" v-model="checked" value="js"/>
+        <label for="python">Javascript</label>
+        <br>
+
+        <input id="python" type="checkbox" v-model="checked" value="python"/>
+        <label for="js">Python</label>
+        <br>
+
+        <p>选择的是：{{ checked }}</p>
+    </div>
+
+    <div id="option">
+        <select v-model="selected">
+            <option disabled value="">请选择</option>
+            <option value="html">HTML</option>
+            <option >Javascript</option>
+            <option >Python</option>
+        </select>
+        <p>选择的是：{{ selectedValue }}</p>
+
+        <select v-model="selected2">
+            <option v-for="option in options" :value="option.value">{{ option.text }}</option>
+        </select>
+        <p>选择的是：{{ selectedValue2 }}</p>
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                picked: "js"
+            }
+        });
+
+        var app2 = new Vue({
+            el: "#fuxuankuang",
+            data: {
+                checked: ["html", "python"],
+            }
+        });
+
+        var app3 = new Vue({
+            el: "#option",
+            data: {
+                selected: "",
+                selected2: "",
+                options: [
+                    {
+                        value: "",
+                        text: "请选择哈",
+                    },
+                    {
+                        value: "java",
+                        text: "Java"
+                    },
+                    {
+                        value: "js",
+                        text: "Javascript"
+                    },
+                    {
+                        value: "py",
+                        text: "python"
+                    },
+                ]
+            },
+            computed: {
+                selectedValue: function () {
+                    if (this.selected === "default") {
+                        return ""
+                    } else {
+                        return this.selected
+                    }
+
+                },
+                selectedValue2: function () {
+                    if (this.selected2 === "default") {
+                        return ""
+                    } else {
+                        return this.selected2
+                    }
+
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
