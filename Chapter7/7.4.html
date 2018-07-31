@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学习Slot</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <child-componentt>
+            <p>父组件slot</p>
+            <p>父组件slot2</p>
+        </child-componentt>
+
+    </div>
+</body>
+    <script>
+        Vue.component("child-componentt", {
+            template: "\
+            <div>\
+            <p>如果没有</p>\
+            </div>\
+            "
+        })
+    </script>
+</html>

@@ -8,17 +8,24 @@
 <body>
     <div id="app">
         <my-component v-on:increase="handleGetTotal" @reduce="handleGetTotal"></my-component>
+        <p>父元素内Count:{{ count }}</p>
     </div>
+
     <script>
         Vue.component("my-component", {
             template: "\
-            <p>Count: {{ count }}</p>\
-            <button @click='handleIncrease'>+1</button>\
-            <button @click='handleReduce'>-1</button>\
-            ",
-            date: function () {
+            <div>\
+                <p>子元素内Count: {{ count }}</p>\
+                <button @click='handleIncrease'>+1</button>\
+                <button @click='handleReduce'>-1</button>\
+            </div>",
+            // template: "\
+            //     <p>子元素内Count: {{ count }}</p>\
+            //     <br>\
+            //     ",
+            data: function () {
                 return {
-                    count:0,
+                    count: 0,
                 }
             },
             methods: {
@@ -36,9 +43,12 @@
         
         let app = new Vue({
             el: "#app",
+            data: {
+                count: 100,
+            },
             methods: {
-                handleGetTotal: function () {
-                    
+                handleGetTotal: function (val) {
+                    this.count = val
                 }
             }
         })

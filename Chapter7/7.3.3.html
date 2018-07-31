@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>非父子组件通信</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>Message:{{ message }}</p>
+        <my-component></my-component>
+        <p ref="p">TEST</p>
+        <child-component ref="child"></child-component>
+    </div>
+    <script>
+        let bus = new Vue();
+        Vue.component("my-component", {
+            template: "<button @click='handleMessage'>传递信息</button>",
+            methods: {
+                handleMessage: function () {
+                    bus.$emit("on-message", "来自子组件的信息");
+                    console.log("OK")
+                }
+            }
+        })
+
+        let app = new Vue({
+            el: '#app',
+            data: {
+                message: "",
+            },
+            mounted: function () {
+                let _this = this;
+                bus.$on("on-message", function (msg) {
+                    _this.message = msg;
+                    console.log("this:", this)
+                })
+            }
+        })
+    </script>
+</body>
+</html>
