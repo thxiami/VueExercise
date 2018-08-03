@@ -8,20 +8,26 @@
 </head>
 <body>
     <div id="app">
-        <child-componentt>
+        <child-component>
             <p>父组件slot</p>
             <p>父组件slot2</p>
-        </child-componentt>
+        </child-component>
 
     </div>
 </body>
     <script>
-        Vue.component("child-componentt", {
+        Vue.component("child-component", {
             template: "\
             <div>\
-            <p>如果没有</p>\
+                <slot>\
+                    <p>如果父组件没有slot，将使用这里的p代替</p>\
+                </slot>\
             </div>\
             "
+        });
+        var app = new Vue({
+            el: '#app'
         })
     </script>
+
 </html>
